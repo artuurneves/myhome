@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} {{ super() }} - Inventory {% endblock %}
+{% block content %}
+<h2>Inventory</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.id }} <a href="{{ url_for('edit_product', id=product.id) }}">  <i class="fa fa-pencil"></i></a><a href="{{ url_for('remove_product', id=product.id) }}">  <i class="fa fa-trash-o"></i></a></td>
+        <td>{{ product.name }}</td>
+        <td><a href="{{ url_for('sub_product', id=product.id) }}"><i class="fa fa-minus"></i></a> {{ product.current_qnt }} <a href="{{ url_for('add_product', id=product.id) }}"><i class="fa fa-plus"></i></a> </td>
+        <td>{{ product.type.name }}</td>
+    </tr>
+    {% endfor %}
+    <tr><a href="{{ url_for('new_product') }}">New Product  <i class="fa fa-plus"></i></a></tr>
+  </tbody>
+</table>
+{% endblock %}
+

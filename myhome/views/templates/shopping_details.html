@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} {{ super() }} - Shopping List {% endblock %}
+{% block content %}
+<div class="col-md-10 col-md-offset-0">
+    <label>Supermaket</label>
+    <label>Date</label>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Item</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.item_name }}</td>
+        <td>{{ item.item_brand }}</td>
+        <td>{{ item.item_price }}</td>
+        <td>{{ item.item_qnt }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

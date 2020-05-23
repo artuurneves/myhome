@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} {{ super() }} - Shopping List {% endblock %}
+{% block content %}
+<div class="col-md-10 col-md-offset-0">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Supermaket</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for s in shopping %}
+    <tr>
+        <td>{{ s.id }}</td>
+        <td>{{ s.supermarket }}</td>
+        <td>{{ s.date }}</td>
+        <td><a href="{{ url_for('shopping_details', id=s.id) }}"><i class="fa fa-plus"></i></a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

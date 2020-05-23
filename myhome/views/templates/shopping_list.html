@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %} {{ super() }} - Shopping List {% endblock %}
+{% block content %}
+<div class="col-md-10 col-md-offset-0">
+    <h2>Shopping</h2>
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <div class="col-md-3 col-md-offset-4">
+            <div class="form-group">
+                <label>Supermarket</label>
+                {{ form.supermarket(class="form-control", placeholder="Supermarket Name") }}
+            </div>
+            <div class="form-group">
+                <label>Shopping Date</label>
+                {{ form.date(class="form-control", placeholder="dd-mm-yyyy") }}
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default">Register</button></td>
+        <a href="{{ url_for('inventory') }}" class="btn btn-default">Back</a>
+
+
+    </form>
+</div>
+<div>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><a href="{{ url_for('new_item') }}">New Item<i class="fa fa-plus"></i></a></tr>
+    {% for item in items %}
+    <tr>
+        <td>{{ item.item_name }}</td>
+        <td>{{ item.item_brand }}</td>
+        <td>{{ item.item_price }}</td>
+        <td>{{ item.item_qnt }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %} {{ super() }} - Supermarket List {% endblock %}
+{% block content %}
+<h2>Supermarket List</h2>
+<table class="table">
+    <thead>
+      <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Low Price</th>
+        <th>Average Price</th>
+        <th>High Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in supermarket_list %}
+      <tr>
+        <td>{{ i['name'] }}</td>
+        <td>{{ i['qnt'] }}</td>
+        <td>{{ i['lp'] }}</td>
+        <td>{{ i['ap'] }}</td>
+        <td>{{ i['hp'] }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

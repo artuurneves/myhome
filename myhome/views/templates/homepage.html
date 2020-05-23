@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ super() }} - Home {% endblock %}
+
+{% block content %}
+<ul>
+    <li><a href="{{ url_for('inventory') }}">Inventory</a></li>
+    <li><a href="{{ url_for('supermarket_list') }}">Supermarket List</a></li>
+    <li><a href="{{ url_for('shopping_list') }}">Supermarket Bill Manual</a></li>
+    <li><a href="{{ url_for('shopping') }}">Shopping</a></li>
+    <li>Expenses</li>
+    <li>Finances</li>
+    <li>Supermarket Bill Auto</li>
+</ul>
+{% endblock %}

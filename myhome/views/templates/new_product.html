@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-3 col-md-offset-4">
+    <h2>New Product</h2>
+    <form action="" method="post">
+        {{ form.csrf_token }}
+
+        <div class="form-group">
+            <label>Name</label>
+            {{ form.name(class="form-control", placeholder="Product Name") }}
+        </div>
+        <div class="form-group">
+            <label>Current Quantity</label>
+            {{ form.current_qnt(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label>Necessary Quantity</label>
+            {{ form.necessary_qnt(class="form-control") }}
+        </div>
+        <div class="form-group">
+            <label>Product Type</label>
+            {{ form.product_type_id(class="form-control") }}
+            <a href="{{ url_for('new_type') }}">New Type  <i class="fa fa-plus"></i></a>
+        </div>
+        <a href="{{ url_for('inventory') }}" class="btn btn-default">Back</a>
+        <button type="submit" class="btn btn-default">Register</button>
+
+    </form>
+</div>
+{% endblock %}

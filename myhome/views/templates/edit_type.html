@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-4 col-md-offset-4">
+    <h2>Edit Product Type</h2>
+    <form action="" method="post">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            <label>Name</label>
+            {{ form.name(class="form-control", placeholder="Product Name") }}
+            <a href="{{ url_for('new_type') }}" class="btn btn-default">Cancel</a>
+            <button type="submit" class="btn btn-default">Save</button>
+        </div>
+
+
+
+    </form>
+</div>
+{% endblock %}
