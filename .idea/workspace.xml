@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db5956d-70a5-4c98-9f3c-a888260b580d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/myhome/views/templates/edit_item.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Procfile" beforeDir="false" afterPath="$PROJECT_DIR$/Procfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/myhome/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/myhome/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myhome/controllers/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/myhome/controllers/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myhome/views/templates/new_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/myhome/views/templates/new_item.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myhome/views/templates/shopping_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/myhome/views/templates/shopping_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/runner.sh" beforeDir="false" afterPath="$PROJECT_DIR$/runner.sh" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
