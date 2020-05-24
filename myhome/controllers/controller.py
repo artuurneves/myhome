@@ -28,7 +28,8 @@ def signup():
         name = form.name.data
         email = form.email.data
         username = form.username.data
-        password_hash = base64.b64encode(form.password.data.encode())
+        # password_hash = base64.b64encode(form.password.data.encode())
+        password_hash = form.password.data
 
         if tables.User.query.filter_by(email=email).first():
             flash('Email already regitered')
@@ -53,7 +54,8 @@ def login():
     if form.validate_on_submit():
         user = tables.User.query.filter_by(username=form.username.data).first()
 
-        if user and base64.b64encode(form.password.data.encode()) == user.password:
+        # if user and base64.b64encode(form.password.data.encode()) == user.password:
+        if user and form.password.data == user.password:
             if form.remember_me.data:
                 flash('Logged In')
                 login_user(user, remember=True)
@@ -83,7 +85,7 @@ def logout():
 @app.route('/inventory')
 def inventory():
     if current_user.is_authenticated:
-        inventory = tables.Product.query.all()
+        inventory = tables.Product.query.filter_by(user_id=current_user.id)
         for product in inventory:
             if product.product_type_id == 1:
                 flash(f"{product.name} has no category!")
@@ -97,7 +99,7 @@ def inventory():
 def new_product():
     if current_user.is_authenticated:
         form = forms.Product()
-        product_types = tables.ProductType.query.all()
+        product_types = tables.ProductType.query.filter_by(user_id=current_user.id)
         choices = ['']
         for pt in product_types:
             choices.append(pt.name)
@@ -108,11 +110,11 @@ def new_product():
             current_qnt = form.current_qnt.data
             necessary_qnt = form.necessary_qnt.data
             product_type_id = form.product_type_id.data
-            if tables.Product.query.filter_by(name=name).first():
+            if tables.Product.query.filter_by(name=name, user_id=current_user.id).first():
                 flash('Product Already Exists')
                 return redirect(url_for('new_product'))
             product_type = tables.ProductType.query.filter_by(name=product_type_id).first()
-            new_prod = tables.Product(name=name, current_qnt=current_qnt, necessary_qnt=necessary_qnt, product_type_id=product_type.id)
+            new_prod = tables.Product(name=name, current_qnt=current_qnt, necessary_qnt=necessary_qnt, product_type_id=product_type.id, user_id=current_user.id)
             db.session.add(new_prod)
             db.session.commit()
             flash('Product Registered Successfully')
@@ -131,7 +133,7 @@ def edit_product(id):
         product_type_name = tables.ProductType.query.filter_by(id=product.product_type_id).first().name
         choices.append(product_type_name)
 
-        product_types = tables.ProductType.query.all()
+        product_types = tables.ProductType.query.filter_by(user_id=current_user.id)
         for type in product_types:
             if type.name not in choices:
                 choices.append(type.name)
@@ -200,13 +202,13 @@ def remove_product(id):
 def new_type():
     if current_user.is_authenticated:
         form = forms.ProductType()
-        types = tables.ProductType.query.all()
+        types = tables.ProductType.query.filter_by(user_id=current_user.id)
         if form.validate_on_submit():
             name = form.name.data.capitalize()
-            if tables.ProductType.query.filter_by(name=name).first():
+            if tables.ProductType.query.filter_by(name=name, user_id=current_user.id).first():
                 flash('Type Already Exists')
                 return redirect(url_for('new_type'))
-            product_type = tables.ProductType(name=name)
+            product_type = tables.ProductType(name=name, user_id=current_user.id)
             db.session.add(product_type)
             db.session.commit()
             flash('Product Type Registed Successfully')
@@ -250,11 +252,11 @@ def remove_type(id):
 @app.route('/supermarket_list')
 def supermarket_list():
     if current_user.is_authenticated:
-        products = tables.Product.query.all()
+        products = tables.Product.query.filter_by(user_id=current_user.id)
         list = []
         for product in products:
             if product.necessary_qnt - product.current_qnt > 0:
-                items = tables.Item.query.filter_by(item_name=product.name)
+                items = tables.Item.query.filter_by(item_name=product.name, user_id=current_user.id)
                 values = []
                 for item in items:
                     values.append(item.item_price)
@@ -277,7 +279,7 @@ def new_item():
             brand = form.item_brand.data.capitalize()
             price = form.item_price.data
             quantity = form.item_qnt.data
-            item = tables.Item(item_name=name, item_brand=brand, item_price=price, item_qnt=quantity)
+            item = tables.Item(item_name=name, item_brand=brand, item_price=price, item_qnt=quantity, user_id=current_user.id)
             db.session.add(item)
             db.session.commit()
             return redirect(url_for('shopping_list'))
@@ -327,12 +329,12 @@ def remove_item(id):
 def shopping_list():
     if current_user.is_authenticated:
         form = forms.Shopping()
-        products = tables.Product.query.all()
+        products = tables.Product.query.filter_by(user_id=current_user.id)
         items = tables.Item.query.filter_by(shopping_id=None)
         if form.validate_on_submit():
             supermarket = form.supermarket.data
             date = form.date.data
-            shopping = tables.Shopping(supermarket=supermarket, date=date)
+            shopping = tables.Shopping(supermarket=supermarket, date=date, user_id=current_user.id)
             db.session.add(shopping)
             db.session.commit()
 
@@ -346,7 +348,7 @@ def shopping_list():
                         break
 
                 if check_item:
-                    product = tables.Product(name=item.item_name, current_qnt=item.item_qnt, necessary_qnt=item.item_qnt, product_type_id=1)
+                    product = tables.Product(name=item.item_name, current_qnt=item.item_qnt, necessary_qnt=item.item_qnt, product_type_id=1, user_id=current_user.id)
                     db.session.add(product)
             db.session.commit()
 
@@ -359,7 +361,7 @@ def shopping_list():
 @app.route('/shopping', methods=['GET'])
 def shopping():
     if current_user.is_authenticated:
-        shopping = tables.Shopping.query.all()
+        shopping = tables.Shopping.query.filter_by(user_id=current_user.id)
 
         return render_template('shopping.html', shopping=shopping)
     else:

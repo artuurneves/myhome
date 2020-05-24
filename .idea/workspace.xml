@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db5956d-70a5-4c98-9f3c-a888260b580d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/migrations/README" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/alembic.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/env.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/script.py.mako" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/migrations/versions/26481e0a5a58_.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/myhome.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myhome/controllers/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/myhome/controllers/controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/myhome/models/tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/myhome/models/tables.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -147,6 +144,14 @@
       <option name="presentableId" value="Default" />
       <updated>1589730778228</updated>
     </task>
+    <task id="LOCAL-00001" summary="version 0.0.1">
+      <created>1590336568813</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1590336568813</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -161,6 +166,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="version 0.0.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="version 0.0.1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
