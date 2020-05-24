@@ -16,8 +16,7 @@ db.init_app(app=app)
 migrate = Migrate(app=app, db=db)
 
 manager = Manager(app=app)
-# manager.add_command('runserver', Server(host='0.0.0.0', port='9000'))
-# manager.add_command('runserver', Server(host='0.0.0.0', port='5000'))
+manager.add_command('runserver', Server(host='0.0.0.0', port='9000'))
 manager.add_command('db', MigrateCommand)
 
 lm = LoginManager(app)

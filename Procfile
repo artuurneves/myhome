@@ -1,1 +1,1 @@
-web: ./runner.sh
+web: python run.py runserver

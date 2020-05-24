@@ -84,6 +84,9 @@ def logout():
 def inventory():
     if current_user.is_authenticated:
         inventory = tables.Product.query.all()
+        for product in inventory:
+            if product.product_type_id == 1:
+                flash(f"{product.name} has no category!")
         return render_template('inventory.html', products=inventory)
     else:
         flash('Please Log In')
@@ -122,59 +125,75 @@ def new_product():
 
 @app.route('/edit_product/<int:id>', methods=['GET', 'POST'])
 def edit_product(id):
-    choices = []
-    product = tables.Product.query.filter_by(id=id).first()
-    product_type_name = tables.ProductType.query.filter_by(id=product.product_type_id).first().name
-    choices.append(product_type_name)
+    if current_user.is_authenticated:
+        choices = []
+        product = tables.Product.query.filter_by(id=id).first()
+        product_type_name = tables.ProductType.query.filter_by(id=product.product_type_id).first().name
+        choices.append(product_type_name)
 
-    product_types = tables.ProductType.query.all()
-    for type in product_types:
-        if type.name not in choices:
-            choices.append(type.name)
+        product_types = tables.ProductType.query.all()
+        for type in product_types:
+            if type.name not in choices:
+                choices.append(type.name)
 
-    form = forms.Product()
-    form.name.data = product.name
-    form.current_qnt.data = product.current_qnt
-    form.necessary_qnt.data = product.necessary_qnt
-    form.product_type_id.choices = choices
+        form = forms.Product()
+        form.name.data = product.name
+        form.current_qnt.data = product.current_qnt
+        form.necessary_qnt.data = product.necessary_qnt
+        form.product_type_id.choices = choices
 
-    if form.validate_on_submit():
-        product.name = form.name.raw_data[0]
-        product.current_qnt = form.current_qnt.raw_data[0]
-        product.necessary_qnt = form.necessary_qnt.raw_data[0]
-        new_product_type = tables.ProductType.query.filter_by(name=form.product_type_id.raw_data[0]).first()
-        product.product_type_id = new_product_type.id
+        if form.validate_on_submit():
+            product.name = form.name.raw_data[0]
+            product.current_qnt = form.current_qnt.raw_data[0]
+            product.necessary_qnt = form.necessary_qnt.raw_data[0]
+            new_product_type = tables.ProductType.query.filter_by(name=form.product_type_id.raw_data[0]).first()
+            product.product_type_id = new_product_type.id
 
-        db.session.commit()
-        flash('Product Edited Successfully')
-        return redirect(url_for('inventory'))
-    return render_template('edit_product.html', form=form)
+            db.session.commit()
+            flash('Product Edited Successfully')
+            return redirect(url_for('inventory'))
+        return render_template('edit_product.html', form=form)
+
+    else:
+        flash('Please Log In')
+        return redirect(url_for('login'))
 
 
 @app.route('/add_product/<int:id>', methods=['GET', 'POST'])
 def add_product(id):
-    product = tables.Product.query.filter_by(id=id).first()
-    product.current_qnt += 1
-    db.session.commit()
-    return redirect(url_for('inventory'))
+    if current_user.is_authenticated:
+        product = tables.Product.query.filter_by(id=id).first()
+        product.current_qnt += 1
+        db.session.commit()
+        return redirect(url_for('inventory'))
+    else:
+        flash('Please Log In')
+        return redirect(url_for('login'))
 
 
 @app.route('/sub_product/<int:id>', methods=['GET', 'POST'])
 def sub_product(id):
-    product = tables.Product.query.filter_by(id=id).first()
-    if product.current_qnt > 0:
-        product.current_qnt -= 1
-        db.session.commit()
-    return redirect(url_for('inventory'))
+    if current_user.is_authenticated:
+        product = tables.Product.query.filter_by(id=id).first()
+        if product.current_qnt > 0:
+            product.current_qnt -= 1
+            db.session.commit()
+        return redirect(url_for('inventory'))
+    else:
+        flash('Please Log In')
+        return redirect(url_for('login'))
 
 
 @app.route('/remove_product/<int:id>', methods=['GET', 'POST'])
 def remove_product(id):
-    product = tables.Product.query.filter_by(id=id).first()
-    db.session.delete(product)
-    db.session.commit()
-    return redirect(url_for('inventory'))
-
+    if current_user.is_authenticated:
+        product = tables.Product.query.filter_by(id=id).first()
+        db.session.delete(product)
+        db.session.commit()
+        return redirect(url_for('inventory'))
+    else:
+        flash('Please Log In')
+        return redirect(url_for('login'))
 
 
 @app.route('/new_type', methods=['GET', 'POST'])
@@ -194,7 +213,6 @@ def new_type():
             return redirect(url_for('new_type'))
 
         return render_template('new_type.html', form=form, types=types)
-
     else:
         flash('Please Log In')
         return redirect(url_for('login'))
@@ -240,7 +258,10 @@ def supermarket_list():
                 values = []
                 for item in items:
                     values.append(item.item_price)
-                list.append({'name': product.name, 'qnt': product.necessary_qnt - product.current_qnt, 'hp': max(values), 'lp': min(values), 'ap': sum(values) / len(values) })
+                if len(values) > 0:
+                    list.append({'name': product.name, 'qnt': product.necessary_qnt - product.current_qnt, 'hp': max(values), 'lp': min(values), 'ap': sum(values) / len(values)})
+                else:
+                    list.append({'name': product.name, 'qnt': product.necessary_qnt - product.current_qnt, 'hp': '-', 'lp': '-','ap': '-'})
         return render_template('supermarket_list.html', supermarket_list=list)
     else:
         flash('Please Log In')
@@ -249,7 +270,6 @@ def supermarket_list():
 
 @app.route('/new_item', methods=['GET', 'POST'])
 def new_item():
-
     if current_user.is_authenticated:
         form = forms.Item()
         if form.validate_on_submit():
@@ -262,6 +282,42 @@ def new_item():
             db.session.commit()
             return redirect(url_for('shopping_list'))
         return render_template('new_item.html', form=form)
+    else:
+        flash('Please Log In')
+        return redirect(url_for('login'))
+
+
+@app.route('/edit_item/<int:id>', methods=['GET', 'POST'])
+def edit_item(id):
+    if current_user.is_authenticated:
+        item = tables.Item.query.filter_by(item_id=id).first()
+        form = forms.Item()
+        form.item_name.data = item.item_name
+        form.item_brand.data = item.item_brand
+        form.item_price.data = item.item_price
+        form.item_qnt.data = item.item_qnt
+
+        if form.validate_on_submit():
+            item.item_name = form.item_name.raw_data[0]
+            item.item_brand = form.item_brand.raw_data[0]
+            item.item_price = form.item_price.raw_data[0]
+            item.item_qnt = form.item_qnt.raw_data[0]
+            db.session.commit()
+            return redirect(url_for('shopping_list'))
+
+        return render_template('edit_item.html', form=form)
+    else:
+        flash('Please Log In')
+        return redirect(url_for('login'))
+
+
+@app.route('/remove_item/<int:id>', methods=['GET', 'POST'])
+def remove_item(id):
+    if current_user.is_authenticated:
+        item = tables.Item.query.filter_by(item_id=id).first()
+        db.session.delete(item)
+        db.session.commit()
+        return redirect(url_for('shopping_list'))
     else:
         flash('Please Log In')
         return redirect(url_for('login'))
@@ -290,7 +346,7 @@ def shopping_list():
                         break
 
                 if check_item:
-                    product = tables.Product(name=item.item_name, current_qnt=item.item_qnt, necessary_qnt=0, product_type_id=3)
+                    product = tables.Product(name=item.item_name, current_qnt=item.item_qnt, necessary_qnt=item.item_qnt, product_type_id=1)
                     db.session.add(product)
             db.session.commit()
 

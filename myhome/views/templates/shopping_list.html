@@ -35,7 +35,7 @@
     <tr><a href="{{ url_for('new_item') }}">New Item<i class="fa fa-plus"></i></a></tr>
     {% for item in items %}
     <tr>
-        <td>{{ item.item_name }}</td>
+        <td>{{ item.item_name }} <a href="{{ url_for('edit_item', id=item.item_id) }}">  <i class="fa fa-pencil"></i></a><a href="{{ url_for('remove_item', id=item.item_id) }}">  <i class="fa fa-trash-o"></i></a></td>
         <td>{{ item.item_brand }}</td>
         <td>{{ item.item_price }}</td>
         <td>{{ item.item_qnt }}</td>

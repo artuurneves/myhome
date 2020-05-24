@@ -18,5 +18,6 @@ RUN pip install -i http://repo.br.scania.com/repository/pypi-all/simple --truste
 
 COPY . /usr/src/app
 
-EXPOSE 8080
-ENTRYPOINT ["runner.sh"]
+EXPOSE 9000
+ENTRYPOINT ["python3"]
+CMD ["run.py", "runserver"]
