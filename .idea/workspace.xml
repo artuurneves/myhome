@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db5956d-70a5-4c98-9f3c-a888260b580d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/myhome.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/myhome.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myhome/controllers/controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/myhome/controllers/controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myhome/models/tables.py" beforeDir="false" afterPath="$PROJECT_DIR$/myhome/models/tables.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/settings.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -28,11 +28,18 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -43,18 +50,6 @@
       <recent name="$PROJECT_DIR$/myhome" />
       <recent name="$PROJECT_DIR$/myhome/controllers" />
     </key>
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="RunManager" selected="Python.run">
     <configuration name="__init__" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -154,22 +149,46 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="version 0.0.1" />
     <option name="LAST_COMMIT_MESSAGE" value="version 0.0.1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1271" height="164" key="GridCell.Tab.0.bottom" timestamp="1590429382015">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1271" height="164" key="GridCell.Tab.0.bottom/72.27.1294.741/72.27.1294.741@72.27.1294.741" timestamp="1590429382015" />
+    <state width="1271" height="164" key="GridCell.Tab.0.center" timestamp="1590429382015">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1271" height="164" key="GridCell.Tab.0.center/72.27.1294.741/72.27.1294.741@72.27.1294.741" timestamp="1590429382015" />
+    <state width="1271" height="164" key="GridCell.Tab.0.left" timestamp="1590429382014">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1271" height="164" key="GridCell.Tab.0.left/72.27.1294.741/72.27.1294.741@72.27.1294.741" timestamp="1590429382014" />
+    <state width="1271" height="164" key="GridCell.Tab.0.right" timestamp="1590429382015">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state width="1271" height="164" key="GridCell.Tab.0.right/72.27.1294.741/72.27.1294.741@72.27.1294.741" timestamp="1590429382015" />
+    <state x="208" y="31" width="1022" height="737" key="SettingsEditor" timestamp="1590427382145">
+      <screen x="72" y="27" width="1294" height="741" />
+    </state>
+    <state x="208" y="31" width="1022" height="737" key="SettingsEditor/72.27.1294.741/72.27.1294.741@72.27.1294.741" timestamp="1590427382145" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
